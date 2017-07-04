@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
+var Boxes = require('./routes/Boxes');
 
 var fs = require('fs');
 //var utils = require('./utils');
@@ -51,8 +52,14 @@ app.set('view engine', 'ejs');
 //--------
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(require('body-parser').urlencoded({
+  extended: true
+}));
+app.use(require('express-session')({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -60,209 +67,91 @@ app.use(passport.session());
 
 app.get('/',
   function(req, res) {
-    res.render('home', { user: req.user });
+    res.render('home', {
+      user: req.user
+    });
   });
 
 app.get('/login',
-  function(req, res){
+  function(req, res) {
     res.render('login');
   });
 
 app.post('/login',
-  passport.authenticate('local', { failureRedirect: '/login' }),
+  passport.authenticate('local', {
+    failureRedirect: '/login'
+  }),
   function(req, res) {
     res.redirect('/start');
   });
 
-  app.get('/server',
+app.get('/server',
   require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('server', { user: req.user });
+  function(req, res) {
+    res.render('server', {
+      user: req.user
+    });
   });
 
 app.get('/logout',
-  function(req, res){
+  function(req, res) {
     req.logout();
     res.redirect('/');
   });
 
 app.get('/profile',
   require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('profile', { user: req.user });
+  function(req, res) {
+    res.render('profile', {
+      user: req.user
+    });
   });
 
 app.get('/start',
   require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('start', { user: req.user });
+  function(req, res) {
+    res.render('start', {
+      user: req.user
+    });
   });
 
 app.get('/config',
   require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('config', { user: req.user });
+  function(req, res) {
+    res.render('config', {
+      user: req.user
+    });
   });
-
 
 app.get('/contact',
   require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('contact', { user: req.user });
-  });
-//-------
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+  function(req, res) {
+    res.render('contact', {
+      user: req.user
+    });
+});
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressLayouts); //este pertence ao Render dos Layout
 app.use('/', index);
 app.use('/users', users);
-//----main----------------------
-//
-//
-//
- app.use(bodyParser.json());
- var exec = require('child_process').exec;
- //---FIM Main--------------------
- //
- //
- //
-//----- main------------------------
-//
-//
-//
-//
+app.use('/Boxes', Boxes);
+
+app.use(bodyParser.json());
+var exec = require('child_process').exec;
+
 app.post('/folder', function(req, res) {
-  var configuracoes = exec('sh script_nginx.sh', function(err, stdout, stderr){
+  var configuracoes = exec('sh script_nginx.sh', function(err, stdout, stderr) {
     console.log("Ficheiros  Nginx:" + stdout);
   });
-  });
-/*
-  app.post('/nginx/reload', function(req, res) {
-  var output = cp.spawnSync('/usr/sbin/nginx', ['-s', 'reload'], {
-    encoding: 'utf8'
-  });
-    res.send({
-      'status': 'ok',
-      'stdout': output.stdout.toString(),
-      'stderr': output.stderr.toString(),
-    });
-  });
-
-  app.post('/conect', function(req, res) {
-  var output = cp.spawnSync('sh', ['scripts/script_ligacoes.sh'], {
-    encoding: 'utf8'
-  });
-
-    res.send({
-      'status': 'ok',
-      'stdout': output.stdout.toString(),
-      'stderr': output.stderr.toString(),
-    });
-  });
-
-
-  app.post('/conectmemtotal', function(req, res) {
-  var output = cp.spawnSync('sh', ['scripts/script_memtotal.sh'], {
-    encoding: 'utf8'
-  });
-
-    res.send({
-      'status': 'ok',
-      'stdout': output.stdout.toString(),
-      'stderr': output.stderr.toString(),
-    });
-    console.log('out:', output);
-  });
-
-  app.post('/conectmemfree', function(req, res) {
-  var output = cp.spawnSync('sh', ['scripts/script_memfree.sh'], {
-    encoding: 'utf8'
-  });
-
-    res.send({
-      'status': 'ok',
-      'stdout': output.stdout.toString(),
-      'stderr': output.stderr.toString(),
-    });
-  });
-
-  app.post('/conectmemavail', function(req, res) {
-  var output = cp.spawnSync('sh', ['scripts/script_memavail.sh'], {
-    encoding: 'utf8'
-  });
-
-    res.send({
-      'status': 'ok',
-      'stdout': output.stdout.toString(),
-      'stderr': output.stderr.toString(),
-    });
-  });
-app.post('/nginx/test', function(req, res) {
-  var output = cp.spawnSync('/usr/sbin/nginx', ['-t'], {
-    encoding: 'utf8'
-  });
-
-  res.send({
-    'status': 'ok',
-    'stdout': output.stdout.toString(),
-    'stderr': output.stderr.toString(),
-  });
 });
-
-//----------
-//---------------
-app.post('/host', function(req, res) {
-  console.log(req.body);
-
-  var confcontent = utils.prepareConf('simpleproxy', {
-    'SERVERNAME': req.body.host,
-    'PORT': req.body.port,
-    'PROXY': req.body.destination,
-    'CACHE': req.body.cache === true ? 'include /etc/nginx/dashboard/cache.conf;' : ''
-  });
-
-  fs.writeFile('/etc/nginx/conf.d/' + req.body.host + '.conf', confcontent, function(err) {
-    if (err) {
-      return res.status(500).send({
-        'status': 'failed',
-        'message': err
-      });
-    }
-
-    res.send({
-      'status': 'created'
-    });
-  });
-});
-//-------- repetido !? ---------- do de cima
-app.post('/hosts', function(req, res) {
-  console.log(req.body);
-
-  var confcontent = utils.prepareConf('simpleproxy', {
-    'SERVERNAME': req.body.hosts,
-    'PORT': req.body.ports,
-    'PROXY': req.body.destinations,
-    'CACHE': req.body.caches === true ? 'include /etc/nginx/dashboard/cache.conf;' : ''
-  });
-
-  fs.writeFile('/etc/nginx/conf.d/' + req.body.hosts + '.conf', confcontent, function(err) {
-    if (err) {
-      return res.status(500).send({
-        'status': 'failed',
-        'message': err
-      });
-    }
-
-    res.send({
-      'status': 'created'
-    });
-  });
-});*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
