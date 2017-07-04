@@ -8,24 +8,43 @@ var cors=require('cors');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var Boxes=require('./routes/Boxes');
-//var Students=require('./routes/Students');
+
+// view engine setup
+
+//--- template
+var engine = require('ejs-mate');
+var engine = require('ejs-locals');
+//este é que faz o Render do layout + outro app.use
+
+var expressLayouts = require('express-ejs-layouts');
+
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
-app.use(cors());
+//app.set('views', path.join(__dirname, 'views'));
+//app.set('view engine', 'jade');
+
 app.use(logger('dev'));
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: false }));
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(expressLayouts); //este pertence ao Render dos Layout
 
 app.use('/', routes);
 app.use('/users', users);
 app.use('/Boxes',Boxes);
+
+
+app.get('/',
+  function(req, res) {
+    res.render('home');
+  });
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -33,7 +52,6 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
 
 // error handlers
 
