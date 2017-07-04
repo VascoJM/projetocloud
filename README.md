@@ -1,7 +1,7 @@
 # Installation MVC Projeto CloudIot:
 
-express cloudiot
-cd cloudiot
-npm install mysql
-npm install express-myconnection
+<p>express cloudiot</p>
+<p>cd cloudiot</p>
+<p>npm install mysql</p>
+<p>npm install express-myconnection</p>
 
