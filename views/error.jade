@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>NGINX</title>
+
+  <!-- Bootstrap Core CSS -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Custom CSS -->
+  <link href="../css/logo-navhome.css" rel="stylesheet">
+
+  <link href="../css/nginxvideo.css" rel="stylesheet">
+
+  <link href="../vendors/css/bootstrap-tagsinput.css" rel="stylesheet" />
+  <!--<script src="../vendors/js/bootstrap-tagsinput.js"></script>-->
+</head>
+
+<body id="main">
+  <!-- Navigation -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+        <a class="navbar-brand" href="start">
+                   <img src="imgs/NGINX.png" alt="NGINX" height="50" width="150">
+              </a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <% if (!user) { %>
+            <li><a href="/login"><i class="glyphicon glyphicon-log-in"></i> Login</a></li>
+            <% } else { %>
+              <li><a href="/profile"><i class="fa fa-sign-out"></i> <%= user.username %></a></li>
+              <% } %>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+  </nav>
+  <!-- ./Navigation -->
+
+  <!-- Page Content -->
+  <div class="form-container">
+    <video poster="https://cdn-1.wp.nginx.com/wp-content/themes/nginx-theme/assets/videos/poster.jpg" id="bgvid" autoplay="" loop="">
+    <source src="https://cdn-1.wp.nginx.com/wp-content/themes/nginx-theme/assets/videos/herobanner.webm" type="video/webm">
+    <source src="https://cdn-1.wp.nginx.com/wp-content/themes/nginx-theme/assets/videos/herobanner.ogv" type="video/ogg">
+    <source src="https://cdn-1.wp.nginx.com/wp-content/themes/nginx-theme/assets/videos/herobanner.mp4" type="video/mp4">
+</video>
+  </div>
+  <div class="container" style="color:white;">
+    <center>
+
+      <div class="row" style="color:white; margin-top:250px;">
+        <h1><strong>Projeto Final</strong></h1>
+        <h2>Computação em Nuvem e Virtualização</h2>
+        <h4>Mestrado IOT / ESTT - IPT</h4>
+        <br />
+        <div class="col-sm-3">
+          <span style="color:white;">
+            <img class="athp-solution-icon" style="max-height:55px;" src="../imgs/dashboard-xxl.png">
+            <span class="athp-solution-text">Dashboard</span>
+          </span>
+        </div>
+        <div class="col-sm-3">
+          <span style="color:white;">
+            <img class="athp-solution-icon" style="max-height:55px;" src="../imgs/icon_white_multi_hosts.png">
+            <span class="athp-solution-text">Create Hosts</span>
+          </span>
+        </div>
+        <div class="col-sm-3">
+          <span style="color:white;">
+            <img class="athp-solution-icon" style="max-height:55px;" src="../imgs/LoadBalancer.png">
+            <span class="athp-solution-text">Load Balancer</span>
+          </span>
+        </div>
+        <div class="col-sm-3">
+          <span style="color:white;">
+            <img class="athp-solution-icon" style="max-height:55px;" src="../imgs/WebServer_icon.png">
+            <span class="athp-solution-text">Redirect Server</span>
+          </span>
+        </div>
+        <br />
+        <br />
+      </div>
+      <div class="row" style="margin-top:45px;">
+        <a href="/login" class="btn btn-warning btn-lg active" role="button" aria-pressed="true" style="color:black;"><strong>Entrar no NGinx</strong></a>
+      </div>
+  </div>
+  <br />
+  </center>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
