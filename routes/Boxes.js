@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var Box = require('../models/Box');
+var box = require('../models/Box');
 
 router.get('/:id?',function(req,res,next){
 
 if(req.params.id){
 
-    Box.getBoxById(req.params.id,function(err,rows){
+    box.getboxById(req.params.id,function(err,rows){
 
         if(err)
         {
@@ -19,7 +19,7 @@ if(req.params.id){
 }
 else{
 
- Box.getAllBoxes(function(err,rows){
+ box.getAllboxes(function(err,rows){
 
         if(err)
         {
@@ -35,7 +35,7 @@ else{
 });
 router.post('/',function(req,res,next){
 
-        Box.addBox(req.body,function(err,count){
+        box.addbox(req.body,function(err,count){
 
             //console.log(req.body);
             if(err)
@@ -48,7 +48,7 @@ router.post('/',function(req,res,next){
         });
 });
  router.post('/:id',function(req,res,next){
-  Box.deleteAll(req.body,function(err,count){
+  box.deleteAll(req.body,function(err,count){
     if(err)
     {
       res.json(err);
@@ -61,7 +61,7 @@ router.post('/',function(req,res,next){
 });
 router.delete('/:id',function(req,res,next){
 
-        Box.deleteBox(req.params.id,function(err,count){
+        box.deleteBox(req.params.id,function(err,count){
 
             if(err)
             {
@@ -76,7 +76,7 @@ router.delete('/:id',function(req,res,next){
 });
 router.put('/:id',function(req,res,next){
 
-    Box.updateBox(req.params.id,req.body,function(err,rows){
+    box.updateBox(req.params.id,req.body,function(err,rows){
 
         if(err)
         {
