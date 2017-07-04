@@ -1,8 +1,10 @@
 # projetocloud
 
 Installation MVC Cloudiot
-> express cloudiot
-> cd cloudiot
+> express projetocloud
+
+> cd projetocloud
 
 > npm install mysql
+
 > npm install express-myconnection
