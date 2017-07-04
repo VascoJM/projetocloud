@@ -142,7 +142,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressLayouts); //este pertence ao Render dos Layout
 app.use('/', index);
 app.use('/users', users);
-app.use('/boxes', boxes);
+app.use('/Boxes', Boxes);
 
 app.use(bodyParser.json());
 var exec = require('child_process').exec;
