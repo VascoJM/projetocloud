@@ -20,9 +20,9 @@ var expressLayouts = require('express-ejs-layouts');
 //----- login
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
-var db = require('./db');
+//var db = require('./db');
 
-passport.use(new Strategy(
+/*passport.use(new Strategy(
   function(username, password, cb) {
     db.users.findByUsername(username, function(err, user) {
       if (err) { return cb(err); }
@@ -41,7 +41,7 @@ passport.deserializeUser(function(id, cb) {
     if (err) { return cb(err); }
     cb(null, user);
   });
-});
+});*/
 //-----------------
 var app = express();
 //--------------------
