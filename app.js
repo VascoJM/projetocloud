@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var Boxes = require('./routes/Boxes');
+var db=require('./dbconnection');
 
 var fs = require('fs');
 //var utils = require('./utils');
@@ -76,6 +77,14 @@ app.get('/login',
   function(req, res) {
     res.render('login');
   });
+
+app.post('/boxes1', function(req, res) {
+  var postboxes = req.body;
+  db.query("Insert into boxes values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",postboxes, function (error, results, fields){
+        if (error) throw error;
+        res.end(JSON.stringfiy(results));
+      });
+});
 
 app.post('/login',
   passport.authenticate('local', {
